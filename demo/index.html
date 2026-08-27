@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tùng Lâm Web UI · Design System Showcase</title>
+  <link rel="stylesheet" href="ui.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="brand-title">AUBOT SYSTEM</div>
+        <div class="brand-subtitle">INDUSTRIAL CONTROL PLANE</div>
+      </div>
+
+      <nav class="navigation">
+        <span class="nav-group-label">GIÁM SÁT & VẬN HÀNH</span>
+        <button class="nav-item active" onclick="this.classList.toggle('active')">
+          <span>📊</span> Tổng quan
+        </button>
+        <button class="nav-item">
+          <span>📦</span> Quản lý kho
+        </button>
+        <button class="nav-item">
+          <span>📷</span> Camera AprilTag
+        </button>
+
+        <span class="nav-group-label">HỆ THỐNG & KẾT NỐI</span>
+        <button class="nav-item">
+          <span>⚡</span> Chẩn đoán CAN / ETH
+        </button>
+        <button class="nav-item">
+          <span>🌐</span> Cấu hình mạng Wi-Fi
+        </button>
+        <button class="nav-item">
+          <span>🔄</span> Nạp firmware OTA
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-badge">
+          <span class="dot ok"></span>
+          <div>
+            <small>QUẢN TRỊ VIÊN</small>
+            <b>tunglam@aubot.vn</b>
+          </div>
+        </div>
+        <button id="themeToggleBtn" class="btn secondary" style="width: 100%; font-size: 12px; min-height: 38px;" onclick="toggleTheme()">
+          ☀️ Giao diện Sáng
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Viewport Content -->
+    <main class="main-viewport">
+      <!-- Hero Header -->
+      <header class="hero">
+        <div>
+          <div class="eyebrow">AUBOT · TELEMETRY & DIAGNOSTICS</div>
+          <h1>Tùng Lâm Web UI Design System</h1>
+          <p class="muted">Bộ phong cách giao diện cá nhân hoá chuẩn công nghiệp cho thiết bị nhúng và hệ thống giám sát.</p>
+        </div>
+        <div>
+          <button class="btn primary" onclick="openConfirmModal()">
+            <span>⚡</span> Thao Tác Mẫu (Modal)
+          </button>
+        </div>
+      </header>
+
+      <!-- System Status Bar -->
+      <section class="system-bar">
+        <div class="system-item ok" title="Gateway Online">
+          <i></i>
+          <span>
+            <small>Gateway ID</small>
+            <b>GW-B300-F407</b>
+          </span>
+        </div>
+        <div class="system-item ok" title="Wi-Fi Connected">
+          <i></i>
+          <span>
+            <small>Wi-Fi STA</small>
+            <b>192.168.1.18</b>
+          </span>
+        </div>
+        <div class="system-item warn" title="AP Mode">
+          <i></i>
+          <span>
+            <small>AP Mode</small>
+            <b>BẬT · 192.168.4.1</b>
+          </span>
+        </div>
+        <div class="system-item ok" title="Ethernet Uplink">
+          <i></i>
+          <span>
+            <small>Ethernet</small>
+            <b>10.0.0.88 (UPLINK)</b>
+          </span>
+        </div>
+        <div class="system-item ok" title="MQTT Cloud">
+          <i></i>
+          <span>
+            <small>MQTT Broker</small>
+            <b>CONNECTED</b>
+          </span>
+        </div>
+        <div class="system-item cyan" title="CAN Bus State">
+          <i></i>
+          <span>
+            <small>CAN Bus</small>
+            <b>ACTIVE (100% OK)</b>
+          </span>
+        </div>
+      </section>
+
+      <!-- 2-Column Content Grid -->
+      <section class="grid-2">
+        <!-- Card 1: Multi-Step Wizard & Controls -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Tiến trình Nạp Firmware (OTA Wizard)</h2>
+            <span class="eyebrow" style="color: var(--accent);">3 BƯỚC AN TOÀN</span>
+          </div>
+
+          <div class="steps">
+            <div id="step1" class="step done" onclick="setStep(1)" style="cursor: pointer;">
+              <span>✓</span>
+              <div>
+                <b>1. Chọn Image</b>
+                <small>File .bin / .hex</small>
+              </div>
+            </div>
+            <div id="step2" class="step active" onclick="setStep(2)" style="cursor: pointer;">
+              <span>2</span>
+              <div>
+                <b>2. Xác Minh</b>
+                <small>Kiểm tra CRC32</small>
+              </div>
+            </div>
+            <div id="step3" class="step" onclick="setStep(3)" style="cursor: pointer;">
+              <span>3</span>
+              <div>
+                <b>3. Kích Hoạt</b>
+                <small>Phân vùng A/B</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-wrap">
+            <div class="progress-head">
+              <span>Tiến độ truyền luồng</span>
+              <b id="demoProgressPct">65%</b>
+            </div>
+            <div class="bar">
+              <i id="demoProgressBar" style="width: 65%;"></i>
+            </div>
+          </div>
+
+          <div class="safety">
+            <i>!</i>
+            <div>
+              <b>Bảo vệ phân vùng Bootloader</b>
+              <p>Hệ thống chỉ cho phép nạp Sector 4–7 (Application). Sector 0–2 luôn được khóa bảo vệ an toàn.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 16px;">
+            <button class="btn primary" onclick="setStep(3)">Chuyển Bước 3</button>
+            <button class="btn secondary" onclick="setStep(1)">Quay Về Bước 1</button>
+          </div>
+        </div>
+
+        <!-- Card 2: Form Controls & UI Elements -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Biểu Mẫu & Linh Kiện Điều Khiển</h2>
+          </div>
+
+          <div class="field">
+            <label>Tên Thiết Bị / Identity</label>
+            <input type="text" value="CallBox-Warehouse-North" placeholder="Nhập tên thiết bị">
+          </div>
+
+          <div class="field">
+            <label>Chế Độ Hoạt Động (Segmented)</label>
+            <div class="segmented">
+              <button class="active" onclick="setSegmented(this, 'auto')">Tự Động</button>
+              <button onclick="setSegmented(this, 'manual')">Thủ Công</button>
+              <button onclick="setSegmented(this, 'debug')">Chẩn Đoán</button>
+            </div>
+          </div>
+
+          <div class="switch-line" style="margin-bottom: 14px;">
+            <div>
+              <b style="font-size: 13px;">Ghi log thời gian thực</b>
+              <small class="muted" style="display: block; font-size: 11px;">Truyền dữ liệu telemetries qua WebSockets</small>
+            </div>
+            <input type="checkbox" checked>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 18px;">
+            <button class="btn primary">Lưu Cấu Hình</button>
+            <button class="btn danger">Xóa Bộ Nhớ Cache</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Native Modal Dialog -->
+  <dialog class="gw-modal" id="demoModal">
+    <div class="gw-modal-brand">
+      <span>AUBOT · XÁC NHẬN HỆ THỐNG</span>
+      <span style="color: var(--muted); cursor: pointer;" onclick="closeConfirmModal()">✕</span>
+    </div>
+    <div class="gw-modal-content">
+      <div class="gw-modal-icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 10v6M12 7h.01"></path>
+        </svg>
+      </div>
+      <div class="gw-modal-copy">
+        <h2>Xác nhận khởi động lại</h2>
+        <p>Bạn có chắc chắn muốn khởi động lại vi điều khiển STM32 và gateway? Thao tác này sẽ làm gián đoạn kết nối trong khoảng 8-10 giây.</p>
+      </div>
+    </div>
+    <div class="gw-modal-actions">
+      <button class="btn secondary" type="button" onclick="closeConfirmModal()">Hủy Bỏ</button>
+      <button class="btn primary" type="button" onclick="closeConfirmModal()">Tiến Hành Khởi Động</button>
+    </div>
+  </dialog>
+
+  <script src="ui.js"></script>
+</body>
+</html>

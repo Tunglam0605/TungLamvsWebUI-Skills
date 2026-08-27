@@ -1,0 +1,181 @@
+<!-- ==========================================================================
+     Tung Lam Web UI — Component Library Reference
+     Copy-pasteable HTML snippets styled with Tung Lam Design System.
+     ========================================================================== -->
+
+<!-- 1. HEADER & HERO WITH EYEBROW -->
+<section class="hero">
+  <div>
+    <div class="eyebrow">AUBOT · SYSTEM DIAGNOSTICS</div>
+    <h1>Trạng thái hệ thống</h1>
+    <p class="muted">Giám sát thông số thời gian thực và cấu hình kết nối.</p>
+  </div>
+  <div class="header-status">
+    <div class="status-chip ok">
+      <i></i>
+      <span>
+        <small>CAN BUS</small>
+        <b>ACTIVE</b>
+      </span>
+    </div>
+    <div class="status-chip ok">
+      <i></i>
+      <span>
+        <small>MQTT</small>
+        <b>ONLINE</b>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- 2. SYSTEM STATUS BAR (TOP OR HORIZONTAL METRICS) -->
+<div class="system-bar">
+  <div class="system-item ok" title="Gateway ID">
+    <i></i>
+    <span>
+      <small>Gateway</small>
+      <b>GW-AUBOT-01</b>
+    </span>
+  </div>
+  <div class="system-item ok" title="WiFi Connection">
+    <i></i>
+    <span>
+      <small>WiFi STA</small>
+      <b>192.168.1.105</b>
+    </span>
+  </div>
+  <div class="system-item warn" title="AP Status">
+    <i></i>
+    <span>
+      <small>AP Mode</small>
+      <b>BẬT · 192.168.4.1</b>
+    </span>
+  </div>
+  <div class="system-item ok" title="Ethernet Uplink">
+    <i></i>
+    <span>
+      <small>Ethernet</small>
+      <b>10.0.0.45</b>
+    </span>
+  </div>
+  <div class="system-item ok" title="Cloud MQTT">
+    <i></i>
+    <span>
+      <small>MQTT</small>
+      <b>CONNECTED</b>
+    </span>
+  </div>
+  <div class="system-item ok" title="CAN Bus State">
+    <i></i>
+    <span>
+      <small>CAN</small>
+      <b>100% OK</b>
+    </span>
+  </div>
+</div>
+
+<!-- 3. MULTI-STEP WIZARD -->
+<div class="steps">
+  <div class="step done">
+    <span>✓</span>
+    <div>
+      <b>1. Chọn firmware</b>
+      <small>File .bin hoặc .hex</small>
+    </div>
+  </div>
+  <div class="step active">
+    <span>2</span>
+    <div>
+      <b>2. Tải lên & xác minh</b>
+      <small>Kiểm tra checksum</small>
+    </div>
+  </div>
+  <div class="step">
+    <span>3</span>
+    <div>
+      <b>3. Cài đặt & khởi động</b>
+      <small>Kích hoạt phân vùng</small>
+    </div>
+  </div>
+</div>
+
+<!-- 4. PROGRESS BAR WITH VIBRANT MULTI-COLOR GRADIENT -->
+<div class="progress-wrap">
+  <div class="progress-head">
+    <span class="progress-label">Đang nạp dữ liệu...</span>
+    <b class="progress-pct">68%</b>
+  </div>
+  <div class="bar">
+    <i style="width: 68%;"></i>
+  </div>
+</div>
+
+<!-- 5. FORM INPUTS & FIELD GROUPS -->
+<div class="card">
+  <div class="card-head">
+    <h2>Cấu hình thiết bị</h2>
+  </div>
+  <div class="fields">
+    <label class="field">
+      <span class="field-label">Tên thiết bị (Host / ID)</span>
+      <input type="text" placeholder="e.g. Callbox-Station-01" required>
+    </label>
+
+    <label class="field">
+      <span class="field-label">Địa chỉ IP Server</span>
+      <input type="text" value="192.168.1.200">
+    </label>
+
+    <label class="field full">
+      <span class="field-label">Chế độ vận hành</span>
+      <select>
+        <option value="production">Sản xuất (Production)</option>
+        <option value="debug">Chẩn đoán & Debug</option>
+        <option value="standalone">Độc lập (Standalone)</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="switch-line" style="margin-top: 14px;">
+    <span>Tự động kết nối lại khi mất mạng</span>
+    <input type="checkbox" checked>
+  </div>
+
+  <div class="actions" style="margin-top: 18px;">
+    <button class="btn primary">Lưu cấu hình</button>
+    <button class="btn secondary">Đặt lại mặc định</button>
+  </div>
+</div>
+
+<!-- 6. SAFETY / WARNING NOTICE CALLOUT -->
+<div class="safety">
+  <i>!</i>
+  <div>
+    <b>Lưu ý quan trọng</b>
+    <p>Không ngắt nguồn hoặc rút cáp trong quá trình cập nhật firmware.</p>
+  </div>
+</div>
+
+<!-- 7. NATIVE MODAL DIALOG -->
+<dialog class="gw-modal" id="demoModal">
+  <div class="gw-modal-brand">
+    <span class="brand-title">AUBOT</span>
+    <span>CONTROL PLANE</span>
+  </div>
+  <div class="gw-modal-content">
+    <div class="gw-modal-icon">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 10v6M12 7h.01"></path>
+      </svg>
+    </div>
+    <div class="gw-modal-copy">
+      <h2>Xác nhận khởi động lại</h2>
+      <p>Bạn có chắc chắn muốn khởi động lại thiết bị ngay bây giờ? Phiên làm việc sẽ tạm gián đoạn khoảng 10 giây.</p>
+    </div>
+  </div>
+  <div class="gw-modal-actions">
+    <button class="btn secondary" type="button" onclick="document.getElementById('demoModal').close()">Hủy</button>
+    <button class="btn primary" type="button">Xác nhận</button>
+  </div>
+</dialog>
