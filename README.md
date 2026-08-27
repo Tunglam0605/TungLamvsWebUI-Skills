@@ -92,7 +92,7 @@ python scripts/export_c_header.py --html "demo/index.html" --css "demo/ui.css" -
 ### 3. Tạo nhanh một trang web mới
 
 ```powershell
-python scripts/generate_page.py --output "my_dashboard.html" --title "Trang Giám Sát Kho" --app-name "AUBOT WAREHOUSE"
+python scripts/generate_page.py --output "my_dashboard.html" --title "Trang Giám Sát Kho" --app-name "TUNGLAM CONTROL"
 ```
 
 ### 4. Chạy kiểm thử tự động

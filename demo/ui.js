@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { type: 'info', tag: 'UART', msg: 'Heartbeat ping ACK from STM32 (BKP1R=0x00, BKP4R=0x53544C4B)' },
     { type: 'warn', tag: 'WIFI', msg: 'RSSI signal dropped to -74dBm' },
     { type: 'success', tag: 'SYS', msg: 'Telemetry sync completed successfully' },
-    { type: 'info', tag: 'MQTT', msg: 'Published telemetry to /aubot/gateway/status' }
+    { type: 'info', tag: 'MQTT', msg: 'Published telemetry to /device/telemetry/status' }
   ];
 
   let logIdx = 0;

@@ -18,7 +18,7 @@ def generate_page(output_path: Path, title: str, app_name: str) -> None:
 
     content = BOILERPLATE_PATH.read_text(encoding="utf-8")
     content = content.replace("Tung Lam Web UI · Template", title)
-    content = content.replace("AUBOT SYSTEM", app_name)
+    content = content.replace("TUNGLAM SYSTEM", app_name)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(content, encoding="utf-8")
@@ -31,7 +31,7 @@ def main(argv=None) -> int:
                         help="Target output HTML file path.")
     parser.add_argument("--title", "-t", type=str, default="Dashboard · Tung Lam Web UI",
                         help="Page <title> text.")
-    parser.add_argument("--app-name", "-n", type=str, default="AUBOT SYSTEM",
+    parser.add_argument("--app-name", "-n", type=str, default="TUNGLAM SYSTEM",
                         help="Main Brand / App Name.")
     args = parser.parse_args(argv)
 

@@ -9,7 +9,7 @@
   <aside class="sidebar">
     <div class="brand-block">
       <img src="/logo.png" class="brand-logo" alt="Logo">
-      <strong>AUBOT SYSTEM</strong>
+      <strong>TUNGLAM SYSTEM</strong>
       <span>WAREHOUSE CONTROL</span>
     </div>
 
@@ -28,8 +28,8 @@
       <div class="user-box">
         <span class="dot ok"></span>
         <span>
-          <small>QUẢN TRỊ VIÊN</small>
-          <b>admin@aubot</b>
+          <small>ADMINISTRATOR</small>
+          <b>admin@dev.local</b>
         </span>
       </div>
     </div>
@@ -65,7 +65,7 @@
   <main class="card login-card">
     <div class="brand-lockup">
       <img src="/logo.png" class="logo" alt="Logo">
-      <div class="eyebrow">AUBOT · GATEWAY PORTAL</div>
+      <div class="eyebrow">TUNGLAM · GATEWAY PORTAL</div>
     </div>
 
     <h1>Đăng nhập</h1>
