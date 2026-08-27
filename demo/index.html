@@ -7,35 +7,82 @@
   <link rel="stylesheet" href="ui.css">
 </head>
 <body>
+  <!-- Mobile Drawer Backdrop -->
+  <div class="drawer-backdrop" onclick="closeMobileDrawer()"></div>
+
+  <!-- Mobile Topbar -->
+  <div class="mobile-topbar">
+    <div style="font-weight: 800; font-size: 16px;">AUBOT SYSTEM</div>
+    <button class="mobile-menu-btn" onclick="openMobileDrawer()" aria-label="Mở menu">
+      <svg class="icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
   <div class="app-shell">
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="brand-block">
-        <div class="brand-title">AUBOT SYSTEM</div>
-        <div class="brand-subtitle">INDUSTRIAL CONTROL PLANE</div>
+        <div>
+          <div class="brand-title">AUBOT SYSTEM</div>
+          <div class="brand-subtitle">INDUSTRIAL CONTROL PLANE</div>
+        </div>
+        <button class="mobile-close-btn" onclick="closeMobileDrawer()">✕</button>
       </div>
 
       <nav class="navigation">
         <span class="nav-group-label">GIÁM SÁT & VẬN HÀNH</span>
-        <button class="nav-item active" onclick="this.classList.toggle('active')">
-          <span>📊</span> Tổng quan
+        <button class="nav-item active">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+            <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+            <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+          </svg>
+          <span>Tổng quan</span>
         </button>
+
         <button class="nav-item">
-          <span>📦</span> Quản lý kho
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          <span>Quản lý kho</span>
         </button>
+
         <button class="nav-item">
-          <span>📷</span> Camera AprilTag
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+          <span>Camera AprilTag</span>
         </button>
 
         <span class="nav-group-label">HỆ THỐNG & KẾT NỐI</span>
         <button class="nav-item">
-          <span>⚡</span> Chẩn đoán CAN / ETH
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="10" rx="2"></rect>
+            <path d="M6 17v4M18 17v4M10 7V3M14 7V3"></path>
+          </svg>
+          <span>Chẩn đoán CAN / ETH</span>
         </button>
+
         <button class="nav-item">
-          <span>🌐</span> Cấu hình mạng Wi-Fi
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"></path>
+          </svg>
+          <span>Cấu hình Wi-Fi</span>
         </button>
+
         <button class="nav-item">
-          <span>🔄</span> Nạp firmware OTA
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+          </svg>
+          <span>Nạp firmware OTA</span>
         </button>
       </nav>
 
@@ -64,10 +111,12 @@
         </div>
         <div style="display: flex; gap: 8px;">
           <button class="btn secondary" onclick="showToast('Kiểm tra kết nối mạng: Ping 1.2ms', 'success')">
-            <span>🔔</span> Thử Toast
+            <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span>Thử Toast</span>
           </button>
           <button class="btn primary" onclick="openConfirmModal()">
-            <span>⚡</span> Mở Modal Dialog
+            <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span>Mở Modal Dialog</span>
           </button>
         </div>
       </header>

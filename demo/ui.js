@@ -14,6 +14,20 @@ function toggleTheme() {
   showToast(next === 'dark' ? 'Đã bật chế độ Dark Mode' : 'Đã bật chế độ Light Mode', 'info');
 }
 
+function openMobileDrawer() {
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.querySelector('.drawer-backdrop');
+  if (sidebar) sidebar.classList.add('drawer-open');
+  if (backdrop) backdrop.classList.add('active');
+}
+
+function closeMobileDrawer() {
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.querySelector('.drawer-backdrop');
+  if (sidebar) sidebar.classList.remove('drawer-open');
+  if (backdrop) backdrop.classList.remove('active');
+}
+
 function openConfirmModal() {
   const modal = document.getElementById('demoModal');
   if (modal) modal.showModal();

@@ -9,6 +9,7 @@ SKILL_DIR = ROOT / ".agents/skills/tunglam-webui"
 SKILL_MD = SKILL_DIR / "SKILL.md"
 TOKENS_CSS = SKILL_DIR / "references/design_tokens.css"
 COMPONENTS_HTML = SKILL_DIR / "references/components.html"
+ICONS_HTML = SKILL_DIR / "references/icons.html"
 BOILERPLATE = SKILL_DIR / "references/boilerplate_template.html"
 DEMO_INDEX = ROOT / "demo/index.html"
 DEMO_CSS = ROOT / "demo/ui.css"
@@ -34,18 +35,18 @@ class TungLamWebUISkillTests(unittest.TestCase):
         self.assertIn("--hover-lift:", content)
         self.assertIn('[data-theme="light"]', content)
 
-    def test_components_html_coverage(self) -> None:
+    def test_components_and_icons_coverage(self) -> None:
         self.assertTrue(COMPONENTS_HTML.exists(), "components.html must exist.")
-        content = COMPONENTS_HTML.read_text(encoding="utf-8")
-        self.assertIn("hero", content)
-        self.assertIn("system-bar", content)
-        self.assertIn("stat-card", content)
-        self.assertIn("table", content)
-        self.assertIn("log-console", content)
-        self.assertIn("filepick", content)
-        self.assertIn("steps", content)
-        self.assertIn("io-group", content)
-        self.assertIn("gw-modal", content)
+        self.assertTrue(ICONS_HTML.exists(), "icons.html must exist.")
+        comp_content = COMPONENTS_HTML.read_text(encoding="utf-8")
+        icon_content = ICONS_HTML.read_text(encoding="utf-8")
+        self.assertIn("hero", comp_content)
+        self.assertIn("stat-card", comp_content)
+        self.assertIn("log-console", comp_content)
+        self.assertIn("filepick", comp_content)
+        self.assertIn("io-group", comp_content)
+        self.assertIn("viewBox=\"0 0 24 24\"", icon_content)
+        self.assertIn("stroke-width=\"1.8\"", icon_content)
 
     def test_demo_coverage(self) -> None:
         self.assertTrue(DEMO_INDEX.exists(), "demo/index.html must exist.")
@@ -55,6 +56,7 @@ class TungLamWebUISkillTests(unittest.TestCase):
         self.assertIn("table", html)
         self.assertIn("log-console", html)
         self.assertIn("translateY(-3px)", css)
+        self.assertIn("drawer-open", css)
         self.assertIn("toast", css)
 
     def test_generate_page_script(self) -> None:

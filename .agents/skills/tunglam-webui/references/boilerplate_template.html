@@ -75,11 +75,13 @@
       flex-direction: column;
       position: fixed;
       inset: 0 auto 0 0;
-      z-index: 20;
+      z-index: 50;
+      transition: transform .25s ease;
     }
-    .brand-block { padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }
+    .brand-block { padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); display: flex; justify-content: space-between; align-items: center; }
     .brand-block strong { display: block; font-size: 18px; color: var(--text); }
     .brand-block span { display: block; font-size: 11px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+    .mobile-close-btn { display: none; background: transparent; border: none; color: var(--muted); font-size: 20px; cursor: pointer; }
 
     .navigation { display: flex; flex-direction: column; gap: 4px; margin-top: 16px; }
     .navigation-group-label {
@@ -119,6 +121,40 @@
       min-height: 100vh;
     }
 
+    /* Mobile Header */
+    .mobile-topbar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border-soft);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .mobile-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-soft);
+      border: 1px solid var(--border-soft);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .drawer-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 45;
+    }
+    .drawer-backdrop.active { display: block; }
+
     /* --- Hero Header & Eyebrow --- */
     .hero {
       display: flex;
@@ -152,6 +188,13 @@
       border: 1px solid var(--border-soft);
       border-radius: var(--radius-sm);
       background: var(--surface-soft);
+      transition: all .25s ease;
+      cursor: default;
+    }
+    .system-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.15);
+      transform: translateY(-2px);
     }
     .system-item i {
       width: 8px;
@@ -176,6 +219,12 @@
       border-radius: var(--radius);
       padding: 20px;
       box-shadow: var(--shadow);
+      transition: all .25s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.18);
     }
     .card h2 { font-size: 18px; margin-bottom: 14px; font-weight: 700; }
 
@@ -216,24 +265,37 @@
       border-color: var(--accent);
       color: #fff;
     }
-    .btn.primary:hover { background: var(--accent); color: #03261d; box-shadow: var(--glow-shadow); }
+    .btn.primary:hover { background: var(--accent); color: #03261d; box-shadow: var(--glow-shadow); transform: translateY(-2px); }
     .btn.secondary { background: var(--surface-soft); }
-    .btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .btn.secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
     /* --- Responsive Collapse --- */
-    @media (max-width: 800px) {
-      .sidebar { display: none; }
+    @media (max-width: 900px) {
+      .sidebar { transform: translateX(-100%); box-shadow: var(--shadow); }
+      .sidebar.drawer-open { transform: translateX(0); }
+      .mobile-close-btn { display: block; }
+      .mobile-topbar { display: flex; }
       .main-content { margin-left: 0; width: 100%; padding: 16px; }
       .grid-2 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
+  <div class="drawer-backdrop" onclick="closeDrawer()"></div>
+
+  <div class="mobile-topbar">
+    <div style="font-weight: 800;">AUBOT SYSTEM</div>
+    <button class="mobile-menu-btn" onclick="openDrawer()">☰</button>
+  </div>
+
   <div class="app-shell">
     <aside class="sidebar">
       <div class="brand-block">
-        <strong>AUBOT SYSTEM</strong>
-        <span>CONTROL DASHBOARD</span>
+        <div>
+          <strong>AUBOT SYSTEM</strong>
+          <span>CONTROL DASHBOARD</span>
+        </div>
+        <button class="mobile-close-btn" onclick="closeDrawer()">✕</button>
       </div>
       <nav class="navigation">
         <span class="navigation-group-label">GIÁM SÁT</span>
@@ -244,7 +306,7 @@
         <button>🔄 Nạp Firmware</button>
       </nav>
       <div style="margin-top: auto; padding-top: 14px;">
-        <button class="btn secondary" style="width: 100%;" onclick="toggleTheme()">🌓 Đổi Giao Diện</button>
+        <button class="btn secondary" style="width: 100%; font-size: 12px;" onclick="toggleTheme()">🌓 Đổi Giao Diện</button>
       </div>
     </aside>
 
@@ -291,6 +353,14 @@
       const html = document.documentElement;
       const nextTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
       html.setAttribute('data-theme', nextTheme);
+    }
+    function openDrawer() {
+      document.querySelector('.sidebar').classList.add('drawer-open');
+      document.querySelector('.drawer-backdrop').classList.add('active');
+    }
+    function closeDrawer() {
+      document.querySelector('.sidebar').classList.remove('drawer-open');
+      document.querySelector('.drawer-backdrop').classList.remove('active');
     }
   </script>
 </body>
