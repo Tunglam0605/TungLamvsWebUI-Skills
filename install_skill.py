@@ -15,7 +15,6 @@ SOURCE_SKILL = ROOT / ".agents/skills/tunglam-webui"
 
 
 def default_skills_dir() -> Path:
-    # Check Antigravity / Gemini config path first
     gemini_skills = Path(os.environ.get("USERPROFILE", "")) / ".gemini/config/skills"
     if gemini_skills.parent.exists():
         return gemini_skills
@@ -41,10 +40,7 @@ def main(argv=None) -> int:
         return 1
 
     dest_skill.parent.mkdir(parents=True, exist_ok=True)
-    if dest_skill.exists():
-        shutil.rmtree(dest_skill)
-
-    shutil.copytree(SOURCE_SKILL, dest_skill)
+    shutil.copytree(SOURCE_SKILL, dest_skill, dirs_exist_ok=True)
     print(f"Successfully installed Tung Lam Web UI Skill to: {dest_skill}")
     return 0
 

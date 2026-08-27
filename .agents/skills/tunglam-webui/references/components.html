@@ -1,14 +1,14 @@
 <!-- ==========================================================================
-     Tung Lam Web UI — Component Library Reference
+     Tung Lam Web UI — Complete Component Library Reference
      Copy-pasteable HTML snippets styled with Tung Lam Design System.
      ========================================================================== -->
 
 <!-- 1. HEADER & HERO WITH EYEBROW -->
 <section class="hero">
   <div>
-    <div class="eyebrow">AUBOT · SYSTEM DIAGNOSTICS</div>
-    <h1>Trạng thái hệ thống</h1>
-    <p class="muted">Giám sát thông số thời gian thực và cấu hình kết nối.</p>
+    <div class="eyebrow">AUBOT · SYSTEM CONTROL PLANE</div>
+    <h1>Bảng Điều Khiển Trung Tâm</h1>
+    <p class="muted">Giám sát thiết bị thời gian thực và quản lý kênh truyền thông.</p>
   </div>
   <div class="header-status">
     <div class="status-chip ok">
@@ -28,7 +28,7 @@
   </div>
 </section>
 
-<!-- 2. SYSTEM STATUS BAR (TOP OR HORIZONTAL METRICS) -->
+<!-- 2. SYSTEM STATUS BAR (6-METRICS GRID) -->
 <div class="system-bar">
   <div class="system-item ok" title="Gateway ID">
     <i></i>
@@ -37,14 +37,14 @@
       <b>GW-AUBOT-01</b>
     </span>
   </div>
-  <div class="system-item ok" title="WiFi Connection">
+  <div class="system-item ok" title="Wi-Fi Connection">
     <i></i>
     <span>
       <small>WiFi STA</small>
       <b>192.168.1.105</b>
     </span>
   </div>
-  <div class="system-item warn" title="AP Status">
+  <div class="system-item warn" title="AP Mode">
     <i></i>
     <span>
       <small>AP Mode</small>
@@ -65,29 +65,115 @@
       <b>CONNECTED</b>
     </span>
   </div>
-  <div class="system-item ok" title="CAN Bus State">
+  <div class="system-item cyan" title="CAN Bus State">
     <i></i>
     <span>
-      <small>CAN</small>
+      <small>CAN Bus</small>
       <b>100% OK</b>
     </span>
   </div>
 </div>
 
-<!-- 3. MULTI-STEP WIZARD -->
+<!-- 3. INTERACTIVE STAT CARDS (Lifting Hover Glow) -->
+<div class="grid-3">
+  <div class="stat-card">
+    <label>TỔNG THIẾT BỊ HOẠT ĐỘNG</label>
+    <div class="value">24 <small class="unit">AGV</small></div>
+    <div class="trend positive">↑ 100% Sẵn sàng</div>
+  </div>
+  <div class="stat-card">
+    <label>LƯU LƯỢNG CAN BUS</label>
+    <div class="value">1,240 <small class="unit">msg/s</small></div>
+    <div class="trend normal">Độ trễ: 1.2ms</div>
+  </div>
+  <div class="stat-card">
+    <label>PHIÊN BẢN FIRMWARE</label>
+    <div class="value">v2.4.8 <small class="badge ok">STABLE</small></div>
+    <div class="trend">Sector 4–7 Active</div>
+  </div>
+</div>
+
+<!-- 4. DATA TABLE WITH MONOSPACE COLUMNS & ACTIONS -->
+<div class="card">
+  <div class="card-head">
+    <h2>Danh sách thiết bị kết nối</h2>
+    <button class="btn secondary btn-sm">Làm mới</button>
+  </div>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>TÊN THIẾT BỊ</th>
+          <th>ĐỊA CHỈ IP</th>
+          <th>MAC / HARDWARE ID</th>
+          <th>TRẠNG THÁI</th>
+          <th style="text-align: right;">THAO TÁC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Callbox-Station-01</b></td>
+          <td><code>192.168.1.50</code></td>
+          <td><code>00:1A:2B:3C:4D:5E</code></td>
+          <td><span class="badge ok">ONLINE</span></td>
+          <td style="text-align: right;">
+            <button class="btn secondary btn-sm">Chi tiết</button>
+            <button class="btn danger btn-sm">Ngắt</button>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Camera-AprilTag-North</b></td>
+          <td><code>192.168.1.51</code></td>
+          <td><code>00:1A:2B:3C:4D:5F</code></td>
+          <td><span class="badge ok">STREAMING</span></td>
+          <td style="text-align: right;">
+            <button class="btn secondary btn-sm">Xem live</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 5. REAL-TIME LOG VIEWER CONSOLE (Terminal Style) -->
+<div class="card">
+  <div class="card-head">
+    <h2>Nhật Ký Hệ Thống (Real-time Stream)</h2>
+    <span class="badge cyan">WEBSOCKET CONNECTED</span>
+  </div>
+  <div class="log-console" id="logConsole">
+    <div class="log-entry info"><span class="log-time">[13:45:01]</span> <span class="log-tag">[INIT]</span> Gateway initialized on port 80</div>
+    <div class="log-entry info"><span class="log-time">[13:45:02]</span> <span class="log-tag">[CAN]</span> Bitrate 500kbps, state ACTIVE</div>
+    <div class="log-entry warn"><span class="log-time">[13:45:05]</span> <span class="log-tag">[WIFI]</span> AP mode active on channel 6</div>
+    <div class="log-entry error"><span class="log-time">[13:45:10]</span> <span class="log-tag">[UART]</span> STM32 frame timeout (recovering...)</div>
+    <div class="log-entry success"><span class="log-time">[13:45:12]</span> <span class="log-tag">[UART]</span> Link re-established. Marker 0x53544C4B valid</div>
+  </div>
+</div>
+
+<!-- 6. DRAG & DROP FIRMWARE UPLOAD BOX -->
+<div class="filepick">
+  <input id="fwFile" type="file" accept=".bin,.hex">
+  <label class="pickbtn" for="fwFile">Chọn file .bin / .hex</label>
+  <div class="filemeta">
+    <b id="fileName">Chưa chọn firmware</b>
+    <small id="fileSize">Hỗ trợ truyền luồng stream an toàn</small>
+  </div>
+</div>
+
+<!-- 7. MULTI-STEP WIZARD & GRADIENT PROGRESS BAR -->
 <div class="steps">
   <div class="step done">
     <span>✓</span>
     <div>
       <b>1. Chọn firmware</b>
-      <small>File .bin hoặc .hex</small>
+      <small>File .bin / .hex</small>
     </div>
   </div>
   <div class="step active">
     <span>2</span>
     <div>
       <b>2. Tải lên & xác minh</b>
-      <small>Kiểm tra checksum</small>
+      <small>Kiểm tra CRC32</small>
     </div>
   </div>
   <div class="step">
@@ -99,10 +185,9 @@
   </div>
 </div>
 
-<!-- 4. PROGRESS BAR WITH VIBRANT MULTI-COLOR GRADIENT -->
 <div class="progress-wrap">
   <div class="progress-head">
-    <span class="progress-label">Đang nạp dữ liệu...</span>
+    <span class="progress-label">Đang truyền luồng firmware...</span>
     <b class="progress-pct">68%</b>
   </div>
   <div class="bar">
@@ -110,57 +195,52 @@
   </div>
 </div>
 
-<!-- 5. FORM INPUTS & FIELD GROUPS -->
-<div class="card">
-  <div class="card-head">
-    <h2>Cấu hình thiết bị</h2>
-  </div>
-  <div class="fields">
-    <label class="field">
-      <span class="field-label">Tên thiết bị (Host / ID)</span>
-      <input type="text" placeholder="e.g. Callbox-Station-01" required>
-    </label>
-
-    <label class="field">
-      <span class="field-label">Địa chỉ IP Server</span>
-      <input type="text" value="192.168.1.200">
-    </label>
-
-    <label class="field full">
-      <span class="field-label">Chế độ vận hành</span>
-      <select>
-        <option value="production">Sản xuất (Production)</option>
-        <option value="debug">Chẩn đoán & Debug</option>
-        <option value="standalone">Độc lập (Standalone)</option>
-      </select>
-    </label>
-  </div>
-
-  <div class="switch-line" style="margin-top: 14px;">
-    <span>Tự động kết nối lại khi mất mạng</span>
-    <input type="checkbox" checked>
-  </div>
-
-  <div class="actions" style="margin-top: 18px;">
-    <button class="btn primary">Lưu cấu hình</button>
-    <button class="btn secondary">Đặt lại mặc định</button>
+<!-- 8. HARDWARE I/O & SENSOR PIN MATRIX -->
+<div class="io-group">
+  <div class="io-label">TRẠNG THÁI CHÂN I/O & CẢM BIẾN</div>
+  <div class="io-chips">
+    <div class="io-chip on">
+      <span class="io-dot"></span>
+      <b>BUTTON 1</b>
+      <small>ACTIVE</small>
+    </div>
+    <div class="io-chip">
+      <span class="io-dot"></span>
+      <b>BUTTON 2</b>
+      <small>IDLE</small>
+    </div>
+    <div class="io-chip green on">
+      <span class="io-dot"></span>
+      <b>RELAY 1</b>
+      <small>CLOSED</small>
+    </div>
+    <div class="io-chip red on">
+      <span class="io-dot"></span>
+      <b>E-STOP</b>
+      <small>TRIGGERED</small>
+    </div>
   </div>
 </div>
 
-<!-- 6. SAFETY / WARNING NOTICE CALLOUT -->
+<!-- 9. ALERT / SAFETY CALLOUT BANNERS -->
+<div class="notice success">
+  <b>Thao tác thành công</b>
+  <p>Cấu hình mạng Wi-Fi đã được lưu vào bộ nhớ NVS.</p>
+</div>
+
 <div class="safety">
   <i>!</i>
   <div>
-    <b>Lưu ý quan trọng</b>
-    <p>Không ngắt nguồn hoặc rút cáp trong quá trình cập nhật firmware.</p>
+    <b>Lưu ý quan trọng trước khi nạp</b>
+    <p>Chỉ nạp Application Sector 4–7. Sector 0–2 Bootloader luôn được bảo vệ nghiêm ngặt.</p>
   </div>
 </div>
 
-<!-- 7. NATIVE MODAL DIALOG -->
+<!-- 10. NATIVE MODAL DIALOG WITH BACKDROP BLUR -->
 <dialog class="gw-modal" id="demoModal">
   <div class="gw-modal-brand">
-    <span class="brand-title">AUBOT</span>
-    <span>CONTROL PLANE</span>
+    <span>AUBOT · XÁC NHẬN THAO TÁC</span>
+    <span style="cursor: pointer;" onclick="document.getElementById('demoModal').close()">✕</span>
   </div>
   <div class="gw-modal-content">
     <div class="gw-modal-icon">
@@ -170,12 +250,12 @@
       </svg>
     </div>
     <div class="gw-modal-copy">
-      <h2>Xác nhận khởi động lại</h2>
-      <p>Bạn có chắc chắn muốn khởi động lại thiết bị ngay bây giờ? Phiên làm việc sẽ tạm gián đoạn khoảng 10 giây.</p>
+      <h2>Xác nhận khởi động lại?</h2>
+      <p>Thiết bị sẽ tiến hành khởi động lại phân vùng mới. Mọi kết nối sẽ tạm dừng trong khoảng 10 giây.</p>
     </div>
   </div>
   <div class="gw-modal-actions">
-    <button class="btn secondary" type="button" onclick="document.getElementById('demoModal').close()">Hủy</button>
-    <button class="btn primary" type="button">Xác nhận</button>
+    <button class="btn secondary" type="button" onclick="document.getElementById('demoModal').close()">Hủy Bỏ</button>
+    <button class="btn primary" type="button">Đồng Ý</button>
   </div>
 </dialog>

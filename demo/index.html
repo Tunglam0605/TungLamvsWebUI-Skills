@@ -60,11 +60,14 @@
         <div>
           <div class="eyebrow">AUBOT · TELEMETRY & DIAGNOSTICS</div>
           <h1>Tùng Lâm Web UI Design System</h1>
-          <p class="muted">Bộ phong cách giao diện cá nhân hoá chuẩn công nghiệp cho thiết bị nhúng và hệ thống giám sát.</p>
+          <p class="muted">Bộ phong cách giao diện cá nhân hoá chuẩn công nghiệp với hiệu ứng nâng & phát sáng viền khi rê chuột.</p>
         </div>
-        <div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn secondary" onclick="showToast('Kiểm tra kết nối mạng: Ping 1.2ms', 'success')">
+            <span>🔔</span> Thử Toast
+          </button>
           <button class="btn primary" onclick="openConfirmModal()">
-            <span>⚡</span> Thao Tác Mẫu (Modal)
+            <span>⚡</span> Mở Modal Dialog
           </button>
         </div>
       </header>
@@ -115,9 +118,28 @@
         </div>
       </section>
 
+      <!-- 3 Stat Cards (Lifting Hover Glow) -->
+      <section class="grid-3">
+        <div class="stat-card">
+          <label>TỔNG THIẾT BỊ HOẠT ĐỘNG</label>
+          <div class="value">24 <small class="unit">AGV / Callbox</small></div>
+          <div class="trend">↑ 100% Đang kết nối</div>
+        </div>
+        <div class="stat-card">
+          <label>LƯU LƯỢNG CAN BUS</label>
+          <div class="value">1,240 <small class="unit">msg/s</small></div>
+          <div class="trend" style="color: var(--cyan);">Độ trễ: 1.2ms</div>
+        </div>
+        <div class="stat-card">
+          <label>PHIÊN BẢN FIRMWARE</label>
+          <div class="value">v2.4.8 <span class="badge ok">STABLE</span></div>
+          <div class="trend">Sector 4–7 Active</div>
+        </div>
+      </section>
+
       <!-- 2-Column Content Grid -->
       <section class="grid-2">
-        <!-- Card 1: Multi-Step Wizard & Controls -->
+        <!-- Card 1: Multi-Step Wizard & OTA Uploader -->
         <div class="card">
           <div class="card-head">
             <h2>Tiến trình Nạp Firmware (OTA Wizard)</h2>
@@ -148,6 +170,16 @@
             </div>
           </div>
 
+          <!-- Drag & Drop Uploader -->
+          <div class="filepick">
+            <input id="demoFileInput" type="file" accept=".bin,.hex">
+            <label class="pickbtn" for="demoFileInput">Chọn Firmware</label>
+            <div class="filemeta">
+              <b id="fileName">Chưa chọn firmware</b>
+              <small id="fileSize">Kéo thả hoặc nhấn chọn file .bin / .hex</small>
+            </div>
+          </div>
+
           <div class="progress-wrap">
             <div class="progress-head">
               <span>Tiến độ truyền luồng</span>
@@ -167,15 +199,43 @@
           </div>
 
           <div style="display: flex; gap: 10px; margin-top: 16px;">
-            <button class="btn primary" onclick="setStep(3)">Chuyển Bước 3</button>
-            <button class="btn secondary" onclick="setStep(1)">Quay Về Bước 1</button>
+            <button class="btn primary" onclick="setStep(3); showToast('Đã kích hoạt phân vùng mới!', 'success')">Kích Hoạt & Khởi Động</button>
+            <button class="btn secondary" onclick="setStep(1)">Hủy Firmware Đã Chọn</button>
           </div>
         </div>
 
-        <!-- Card 2: Form Controls & UI Elements -->
+        <!-- Card 2: Hardware I/O Matrix & Form Controls -->
         <div class="card">
           <div class="card-head">
-            <h2>Biểu Mẫu & Linh Kiện Điều Khiển</h2>
+            <h2>Giám Sát Phần Cứng & Điều Khiển</h2>
+            <span class="badge cyan">I/O LIVE MATRIX</span>
+          </div>
+
+          <!-- Hardware I/O Sensor Matrix -->
+          <div class="io-group">
+            <div class="io-label">TRẠNG THÁI CHÂN CẢM BIẾN & RELAY</div>
+            <div class="io-chips">
+              <div class="io-chip on">
+                <span class="io-dot"></span>
+                <b>BUTTON 1</b>
+                <small>PRESSED</small>
+              </div>
+              <div class="io-chip">
+                <span class="io-dot"></span>
+                <b>BUTTON 2</b>
+                <small>IDLE</small>
+              </div>
+              <div class="io-chip green on">
+                <span class="io-dot"></span>
+                <b>RELAY 1</b>
+                <small>CLOSED</small>
+              </div>
+              <div class="io-chip red on">
+                <span class="io-dot"></span>
+                <b>E-STOP</b>
+                <small>TRIGGERED</small>
+              </div>
+            </div>
           </div>
 
           <div class="field">
@@ -197,12 +257,79 @@
               <b style="font-size: 13px;">Ghi log thời gian thực</b>
               <small class="muted" style="display: block; font-size: 11px;">Truyền dữ liệu telemetries qua WebSockets</small>
             </div>
-            <input type="checkbox" checked>
+            <input type="checkbox" checked onchange="showToast('Đã thay đổi thiết lập telemetry log', 'info')">
           </div>
 
           <div style="display: flex; gap: 10px; margin-top: 18px;">
-            <button class="btn primary">Lưu Cấu Hình</button>
-            <button class="btn danger">Xóa Bộ Nhớ Cache</button>
+            <button class="btn primary" onclick="showToast('Đã lưu cấu hình thành công!', 'success')">Lưu Cấu Hình</button>
+            <button class="btn danger" onclick="showToast('Đã xóa bộ nhớ đệm cache', 'error')">Xóa Cache</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Table & Real-time Console Grid -->
+      <section class="grid-2">
+        <!-- Data Table -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Danh Sách Thiết Bị Kết Nối</h2>
+            <button class="btn secondary btn-sm" onclick="showToast('Đã quét lại mạng thành công', 'info')">Quét Mạng</button>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>TÊN THIẾT BỊ</th>
+                  <th>IP / PORT</th>
+                  <th>MAC ADDRESS</th>
+                  <th>TRẠNG THÁI</th>
+                  <th style="text-align: right;">THAO TÁC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Callbox-Station-01</b></td>
+                  <td><code>192.168.1.50</code></td>
+                  <td><code>00:1A:2B:3C:4D:5E</code></td>
+                  <td><span class="badge ok">ONLINE</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn secondary btn-sm" onclick="showToast('Mở chi tiết Callbox-01', 'info')">Chi tiết</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Camera-AprilTag-North</b></td>
+                  <td><code>192.168.1.51</code></td>
+                  <td><code>00:1A:2B:3C:4D:5F</code></td>
+                  <td><span class="badge cyan">STREAMING</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn secondary btn-sm" onclick="showToast('Mở video stream camera', 'info')">Xem Live</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>AGV-Transporter-03</b></td>
+                  <td><code>192.168.1.55</code></td>
+                  <td><code>00:1A:2B:3C:4D:62</code></td>
+                  <td><span class="badge warn">BUSY</span></td>
+                  <td style="text-align: right;">
+                    <button class="btn secondary btn-sm" onclick="showToast('Mở lệnh AGV-03', 'info')">Điều khiển</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Real-Time Log Console -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Nhật Ký Thời Gian Thực (Log Console)</h2>
+            <span class="badge cyan">WEBSOCKET LIVE</span>
+          </div>
+          <div class="log-console" id="logConsole">
+            <div class="log-entry info"><span class="log-time">[13:45:01]</span> <span class="log-tag">[INIT]</span> Gateway WebUI initialized on port 80</div>
+            <div class="log-entry info"><span class="log-time">[13:45:02]</span> <span class="log-tag">[CAN]</span> CAN controller bitrate 500kbps, state ACTIVE</div>
+            <div class="log-entry warn"><span class="log-time">[13:45:05]</span> <span class="log-tag">[WIFI]</span> AP mode active on channel 6, SSID: CallBox_AP</div>
+            <div class="log-entry success"><span class="log-time">[13:45:08]</span> <span class="log-tag">[UART]</span> STM32 Application F407 verified with marker 0x53544C4B</div>
           </div>
         </div>
       </section>
@@ -229,7 +356,7 @@
     </div>
     <div class="gw-modal-actions">
       <button class="btn secondary" type="button" onclick="closeConfirmModal()">Hủy Bỏ</button>
-      <button class="btn primary" type="button" onclick="closeConfirmModal()">Tiến Hành Khởi Động</button>
+      <button class="btn primary" type="button" onclick="closeConfirmModal(); showToast('Lệnh khởi động lại đã được gửi!', 'warn');">Tiến Hành Khởi Động</button>
     </div>
   </dialog>
 
