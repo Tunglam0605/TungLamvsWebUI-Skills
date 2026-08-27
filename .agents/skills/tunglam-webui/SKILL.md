@@ -1,6 +1,6 @@
 ---
 name: tunglam-webui
-description: Use when designing, building, modifying, or reviewing frontend web interfaces, dashboards, control panels, portals, or embedded WebUIs following the signature Tung Lam Design System (Dark/Light mode, Emerald/Cyan palette, glassmorphism, glow accents, lifting hover motion, and responsive layout shells).
+description: Use ONLY when explicitly requested by the user (or when asked to use the tunglam-webui skill) for designing, building, modifying, or reviewing frontend web interfaces, dashboards, control panels, portals, or embedded WebUIs following the signature Tung Lam Design System.
 ---
 
 # Tung Lam Web UI Design System & Universal Frontend Skill

@@ -22,7 +22,7 @@ class TungLamWebUISkillTests(unittest.TestCase):
         self.assertTrue(content.startswith("---"), "SKILL.md must start with YAML frontmatter.")
         self.assertIn("name: tunglam-webui", content)
         self.assertIn("description:", content)
-        self.assertIn("Use when", content)
+        self.assertIn("Use ONLY when explicitly requested", content)
         self.assertIn("Lifting Hover Motion", content)
 
     def test_design_tokens_css(self) -> None:
